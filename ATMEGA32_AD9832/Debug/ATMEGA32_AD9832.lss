@@ -1,0 +1,872 @@
+
+ATMEGA32_AD9832.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000048e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000014  00800060  0000048e  00000502  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000516  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000548  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000078  00000000  00000000  00000584  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c2d  00000000  00000000  000005fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006bc  00000000  00000000  00001229  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000591  00000000  00000000  000018e5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000138  00000000  00000000  00001e78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000445  00000000  00000000  00001fb0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000005de  00000000  00000000  000023f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000068  00000000  00000000  000029d3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e8       	ldi	r30, 0x8E	; 142
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a4 37       	cpi	r26, 0x74	; 116
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 88 01 	call	0x310	; 0x310 <main>
+  7a:	0c 94 45 02 	jmp	0x48a	; 0x48a <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <Port_Init>:
+    }
+}
+
+static void Port_Init(void)
+{
+    PORTA = 0x00; // PA Output LOW
+  82:	1b ba       	out	0x1b, r1	; 27
+    DDRA = 0xF0; // PA4~7 Output Direction
+  84:	80 ef       	ldi	r24, 0xF0	; 240
+  86:	8a bb       	out	0x1a, r24	; 26
+  88:	08 95       	ret
+
+0000008a <Uart_Init>:
+    OUTPUT_ON(AD5204_PORT,AD5204_CS_PIN);
+}
+
+static void Uart_Init(void)
+{
+	UCSRB= (1<<RXEN) | (1<<TXEN);                  // Enable Receiver and Transmitter
+  8a:	88 e1       	ldi	r24, 0x18	; 24
+  8c:	8a b9       	out	0x0a, r24	; 10
+	UCSRC= (1<<URSEL) | (1<<UCSZ1) | (1<<UCSZ0);   // Asynchronous mode 8-bit data and 1-stop bit
+  8e:	86 e8       	ldi	r24, 0x86	; 134
+  90:	80 bd       	out	0x20, r24	; 32
+	UCSRA= 0x00;                                   // Clear the UASRT status register
+  92:	1b b8       	out	0x0b, r1	; 11
+	UBRRL = 3; //115200bps 3(7.3728Mhz)
+  94:	83 e0       	ldi	r24, 0x03	; 3
+  96:	89 b9       	out	0x09, r24	; 9
+	UBRRH = 0; //115200bps 3(7.3728Mhz)
+  98:	10 bc       	out	0x20, r1	; 32
+  9a:	08 95       	ret
+
+0000009c <Uart_Transmit>:
+}
+
+static void Uart_Transmit(char data)
+{
+    /* Wait for empty transmit buffer */
+    while (!( UCSRA & (1<<UDRE)));
+  9c:	5d 9b       	sbis	0x0b, 5	; 11
+  9e:	fe cf       	rjmp	.-4      	; 0x9c <Uart_Transmit>
+    /* Put data into buffer, sends the data */
+    UDR = data;
+  a0:	8c b9       	out	0x0c, r24	; 12
+  a2:	08 95       	ret
+
+000000a4 <Uart_Transmit_Array>:
+	UBRRL = 3; //115200bps 3(7.3728Mhz)
+	UBRRH = 0; //115200bps 3(7.3728Mhz)
+}
+
+static void Uart_Transmit_Array(char *data_ptr, unsigned char length)
+{
+  a4:	0f 93       	push	r16
+  a6:	1f 93       	push	r17
+  a8:	cf 93       	push	r28
+  aa:	df 93       	push	r29
+  ac:	fc 01       	movw	r30, r24
+  ae:	d6 2f       	mov	r29, r22
+    unsigned char ch;
+    for(ch=0;ch<length;ch++)
+  b0:	c0 e0       	ldi	r28, 0x00	; 0
+  b2:	08 c0       	rjmp	.+16     	; 0xc4 <Uart_Transmit_Array+0x20>
+    {
+        Uart_Transmit(*data_ptr++);
+  b4:	8f 01       	movw	r16, r30
+  b6:	0f 5f       	subi	r16, 0xFF	; 255
+  b8:	1f 4f       	sbci	r17, 0xFF	; 255
+  ba:	80 81       	ld	r24, Z
+  bc:	0e 94 4e 00 	call	0x9c	; 0x9c <Uart_Transmit>
+}
+
+static void Uart_Transmit_Array(char *data_ptr, unsigned char length)
+{
+    unsigned char ch;
+    for(ch=0;ch<length;ch++)
+  c0:	cf 5f       	subi	r28, 0xFF	; 255
+    {
+        Uart_Transmit(*data_ptr++);
+  c2:	f8 01       	movw	r30, r16
+}
+
+static void Uart_Transmit_Array(char *data_ptr, unsigned char length)
+{
+    unsigned char ch;
+    for(ch=0;ch<length;ch++)
+  c4:	cd 17       	cp	r28, r29
+  c6:	b0 f3       	brcs	.-20     	; 0xb4 <Uart_Transmit_Array+0x10>
+    {
+        Uart_Transmit(*data_ptr++);
+    }
+}
+  c8:	df 91       	pop	r29
+  ca:	cf 91       	pop	r28
+  cc:	1f 91       	pop	r17
+  ce:	0f 91       	pop	r16
+  d0:	08 95       	ret
+
+000000d2 <Clear_Tx_Buffer>:
+    /* Put data into buffer, sends the data */
+    UDR = data;
+}
+static void Clear_Tx_Buffer(char *buf,unsigned int length)
+{
+    for(unsigned int i = 0; i < length; i++)
+  d2:	20 e0       	ldi	r18, 0x00	; 0
+  d4:	30 e0       	ldi	r19, 0x00	; 0
+  d6:	06 c0       	rjmp	.+12     	; 0xe4 <Clear_Tx_Buffer+0x12>
+    {
+        buf[i] = 0;
+  d8:	fc 01       	movw	r30, r24
+  da:	e2 0f       	add	r30, r18
+  dc:	f3 1f       	adc	r31, r19
+  de:	10 82       	st	Z, r1
+    /* Put data into buffer, sends the data */
+    UDR = data;
+}
+static void Clear_Tx_Buffer(char *buf,unsigned int length)
+{
+    for(unsigned int i = 0; i < length; i++)
+  e0:	2f 5f       	subi	r18, 0xFF	; 255
+  e2:	3f 4f       	sbci	r19, 0xFF	; 255
+  e4:	26 17       	cp	r18, r22
+  e6:	37 07       	cpc	r19, r23
+  e8:	b8 f3       	brcs	.-18     	; 0xd8 <Clear_Tx_Buffer+0x6>
+    {
+        buf[i] = 0;
+    }
+  ea:	08 95       	ret
+
+000000ec <AD9832_Write_Register>:
+        AD9832_Write_Register(0xC000);        
+    }
+}
+
+static void AD9832_Write_Register(uint16_t reg)
+{
+  ec:	ac 01       	movw	r20, r24
+    OUTPUT_ON(AD9832_PORT,AD9832_CLK);
+  ee:	8b b3       	in	r24, 0x1b	; 27
+  f0:	80 68       	ori	r24, 0x80	; 128
+  f2:	8b bb       	out	0x1b, r24	; 27
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  f4:	61 e3       	ldi	r22, 0x31	; 49
+  f6:	6a 95       	dec	r22
+  f8:	f1 f7       	brne	.-4      	; 0xf6 <AD9832_Write_Register+0xa>
+  fa:	00 00       	nop
+    _delay_us(20);
+    OUTPUT_OFF(AD9832_PORT,AD9832_FSYNC_PIN);
+  fc:	8b b3       	in	r24, 0x1b	; 27
+  fe:	8f 7d       	andi	r24, 0xDF	; 223
+ 100:	8b bb       	out	0x1b, r24	; 27
+
+    for (uint8_t i = 0; i < 16; i++)
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	20 c0       	rjmp	.+64     	; 0x146 <AD9832_Write_Register+0x5a>
+    {
+        if (((reg >> (15-i)) & 0x01) == 1)
+ 106:	2f e0       	ldi	r18, 0x0F	; 15
+ 108:	30 e0       	ldi	r19, 0x00	; 0
+ 10a:	29 1b       	sub	r18, r25
+ 10c:	31 09       	sbc	r19, r1
+ 10e:	ba 01       	movw	r22, r20
+ 110:	02 c0       	rjmp	.+4      	; 0x116 <AD9832_Write_Register+0x2a>
+ 112:	76 95       	lsr	r23
+ 114:	67 95       	ror	r22
+ 116:	2a 95       	dec	r18
+ 118:	e2 f7       	brpl	.-8      	; 0x112 <AD9832_Write_Register+0x26>
+ 11a:	60 ff       	sbrs	r22, 0
+ 11c:	04 c0       	rjmp	.+8      	; 0x126 <AD9832_Write_Register+0x3a>
+        {
+            OUTPUT_ON(AD9832_PORT,AD9832_SDI_PIN);
+ 11e:	2b b3       	in	r18, 0x1b	; 27
+ 120:	20 64       	ori	r18, 0x40	; 64
+ 122:	2b bb       	out	0x1b, r18	; 27
+ 124:	03 c0       	rjmp	.+6      	; 0x12c <AD9832_Write_Register+0x40>
+        }
+        else
+        {
+            OUTPUT_OFF(AD9832_PORT,AD9832_SDI_PIN);
+ 126:	2b b3       	in	r18, 0x1b	; 27
+ 128:	2f 7b       	andi	r18, 0xBF	; 191
+ 12a:	2b bb       	out	0x1b, r18	; 27
+ 12c:	7b e7       	ldi	r23, 0x7B	; 123
+ 12e:	7a 95       	dec	r23
+ 130:	f1 f7       	brne	.-4      	; 0x12e <AD9832_Write_Register+0x42>
+        }
+        _delay_us(50);
+        OUTPUT_OFF(AD9832_PORT,AD9832_CLK);
+ 132:	2b b3       	in	r18, 0x1b	; 27
+ 134:	2f 77       	andi	r18, 0x7F	; 127
+ 136:	2b bb       	out	0x1b, r18	; 27
+ 138:	8b e7       	ldi	r24, 0x7B	; 123
+ 13a:	8a 95       	dec	r24
+ 13c:	f1 f7       	brne	.-4      	; 0x13a <AD9832_Write_Register+0x4e>
+        _delay_us(50);
+        OUTPUT_ON(AD9832_PORT,AD9832_CLK);
+ 13e:	2b b3       	in	r18, 0x1b	; 27
+ 140:	20 68       	ori	r18, 0x80	; 128
+ 142:	2b bb       	out	0x1b, r18	; 27
+{
+    OUTPUT_ON(AD9832_PORT,AD9832_CLK);
+    _delay_us(20);
+    OUTPUT_OFF(AD9832_PORT,AD9832_FSYNC_PIN);
+
+    for (uint8_t i = 0; i < 16; i++)
+ 144:	9f 5f       	subi	r25, 0xFF	; 255
+ 146:	90 31       	cpi	r25, 0x10	; 16
+ 148:	f0 f2       	brcs	.-68     	; 0x106 <AD9832_Write_Register+0x1a>
+        OUTPUT_OFF(AD9832_PORT,AD9832_CLK);
+        _delay_us(50);
+        OUTPUT_ON(AD9832_PORT,AD9832_CLK);
+    }
+
+    OUTPUT_ON(AD9832_PORT,AD9832_FSYNC_PIN);
+ 14a:	8b b3       	in	r24, 0x1b	; 27
+ 14c:	80 62       	ori	r24, 0x20	; 32
+ 14e:	8b bb       	out	0x1b, r24	; 27
+ 150:	08 95       	ret
+
+00000152 <AD9832_Set_Frequency>:
+    AD9832_Write_Register(0xB000);
+    AD9832_Write_Register(0xC000);
+}
+
+static void AD9832_Set_Frequency(uint32_t freq)
+{
+ 152:	af 92       	push	r10
+ 154:	bf 92       	push	r11
+ 156:	cf 92       	push	r12
+ 158:	df 92       	push	r13
+ 15a:	ef 92       	push	r14
+ 15c:	ff 92       	push	r15
+ 15e:	0f 93       	push	r16
+ 160:	1f 93       	push	r17
+ 162:	cf 93       	push	r28
+ 164:	df 93       	push	r29
+    // Calculate the multiplier
+    uint32_t multiplier = (uint32_t)(((uint64_t)freq << 32) / AD9832_MASTER_CLOCK);
+ 166:	dc 01       	movw	r26, r24
+ 168:	cb 01       	movw	r24, r22
+ 16a:	28 2f       	mov	r18, r24
+ 16c:	39 2f       	mov	r19, r25
+ 16e:	4a 2f       	mov	r20, r26
+ 170:	5b 2f       	mov	r21, r27
+ 172:	60 e0       	ldi	r22, 0x00	; 0
+ 174:	70 e0       	ldi	r23, 0x00	; 0
+ 176:	80 e0       	ldi	r24, 0x00	; 0
+ 178:	90 e0       	ldi	r25, 0x00	; 0
+ 17a:	00 e2       	ldi	r16, 0x20	; 32
+ 17c:	0e 94 2c 02 	call	0x458	; 0x458 <__ashldi3>
+ 180:	68 94       	set
+ 182:	aa 24       	eor	r10, r10
+ 184:	a7 f8       	bld	r10, 7
+ 186:	0f 2e       	mov	r0, r31
+ 188:	f6 e9       	ldi	r31, 0x96	; 150
+ 18a:	bf 2e       	mov	r11, r31
+ 18c:	f0 2d       	mov	r31, r0
+ 18e:	0f 2e       	mov	r0, r31
+ 190:	f8 e9       	ldi	r31, 0x98	; 152
+ 192:	cf 2e       	mov	r12, r31
+ 194:	f0 2d       	mov	r31, r0
+ 196:	d1 2c       	mov	r13, r1
+ 198:	e1 2c       	mov	r14, r1
+ 19a:	f1 2c       	mov	r15, r1
+ 19c:	00 e0       	ldi	r16, 0x00	; 0
+ 19e:	10 e0       	ldi	r17, 0x00	; 0
+ 1a0:	0e 94 cf 01 	call	0x39e	; 0x39e <__udivdi3>
+ 1a4:	72 2f       	mov	r23, r18
+ 1a6:	63 2f       	mov	r22, r19
+ 1a8:	02 2f       	mov	r16, r18
+ 1aa:	13 2f       	mov	r17, r19
+ 1ac:	24 2f       	mov	r18, r20
+ 1ae:	35 2f       	mov	r19, r21
+
+    // Break the multiplier into four chunks that specify each of the four registers that must be written to
+    uint16_t data_0,data_1,data_2,data_3;
+    data_3 = 0x3300 | (0x00FF & (uint16_t)(multiplier >> 24));  // FREQ0 H-MSBs
+ 1b0:	83 2f       	mov	r24, r19
+ 1b2:	99 27       	eor	r25, r25
+ 1b4:	aa 27       	eor	r26, r26
+ 1b6:	bb 27       	eor	r27, r27
+ 1b8:	99 27       	eor	r25, r25
+    data_2 = 0x2200 | (0x00FF & (uint16_t)(multiplier >> 16));  // FREQ0 L-MSBs
+ 1ba:	c4 2f       	mov	r28, r20
+ 1bc:	d0 e0       	ldi	r29, 0x00	; 0
+ 1be:	d2 62       	ori	r29, 0x22	; 34
+    data_1 = 0x3100 | (0x00FF & (uint16_t)(multiplier >> 8));   // FREQ0 H-LSBs
+ 1c0:	01 2f       	mov	r16, r17
+ 1c2:	12 2f       	mov	r17, r18
+ 1c4:	23 2f       	mov	r18, r19
+ 1c6:	33 27       	eor	r19, r19
+ 1c8:	11 27       	eor	r17, r17
+ 1ca:	11 63       	ori	r17, 0x31	; 49
+    data_0 = 0x2000 | (0x00FF & (uint16_t)(multiplier));        // FREQ0 L-LSBs    
+ 1cc:	47 2f       	mov	r20, r23
+ 1ce:	56 2f       	mov	r21, r22
+ 1d0:	55 27       	eor	r21, r21
+ 1d2:	7a 01       	movw	r14, r20
+ 1d4:	68 94       	set
+ 1d6:	f5 f8       	bld	r15, 5
+
+    AD9832_Write_Register(data_3);
+ 1d8:	93 63       	ori	r25, 0x33	; 51
+ 1da:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(data_2);
+ 1de:	ce 01       	movw	r24, r28
+ 1e0:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(data_1);
+ 1e4:	c8 01       	movw	r24, r16
+ 1e6:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(data_0);
+ 1ea:	c7 01       	movw	r24, r14
+ 1ec:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+
+    AD9832_Write_Register(0x1900);  // PHASE0 MSBs
+ 1f0:	80 e0       	ldi	r24, 0x00	; 0
+ 1f2:	99 e1       	ldi	r25, 0x19	; 25
+ 1f4:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(0x0800);  // PHASE0 LSBs    
+ 1f8:	80 e0       	ldi	r24, 0x00	; 0
+ 1fa:	98 e0       	ldi	r25, 0x08	; 8
+ 1fc:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+}
+ 200:	df 91       	pop	r29
+ 202:	cf 91       	pop	r28
+ 204:	1f 91       	pop	r17
+ 206:	0f 91       	pop	r16
+ 208:	ff 90       	pop	r15
+ 20a:	ef 90       	pop	r14
+ 20c:	df 90       	pop	r13
+ 20e:	cf 90       	pop	r12
+ 210:	bf 90       	pop	r11
+ 212:	af 90       	pop	r10
+ 214:	08 95       	ret
+
+00000216 <AD9832_Init>:
+    DDRA = 0xF0; // PA4~7 Output Direction
+}
+
+static void AD9832_Init(void)
+{
+    OUTPUT_ON(AD9832_PORT,AD9832_FSYNC_PIN);    
+ 216:	8b b3       	in	r24, 0x1b	; 27
+ 218:	80 62       	ori	r24, 0x20	; 32
+ 21a:	8b bb       	out	0x1b, r24	; 27
+    OUTPUT_ON(AD9832_PORT,AD9832_CLK);
+ 21c:	8b b3       	in	r24, 0x1b	; 27
+ 21e:	80 68       	ori	r24, 0x80	; 128
+ 220:	8b bb       	out	0x1b, r24	; 27
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 222:	8f ef       	ldi	r24, 0xFF	; 255
+ 224:	97 e4       	ldi	r25, 0x47	; 71
+ 226:	01 97       	sbiw	r24, 0x01	; 1
+ 228:	f1 f7       	brne	.-4      	; 0x226 <AD9832_Init+0x10>
+ 22a:	00 c0       	rjmp	.+0      	; 0x22c <AD9832_Init+0x16>
+ 22c:	00 00       	nop
+    _delay_ms(10);
+    AD9832_Write_Register(0xF800);
+ 22e:	80 e0       	ldi	r24, 0x00	; 0
+ 230:	98 ef       	ldi	r25, 0xF8	; 248
+ 232:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(0xB000);
+ 236:	80 e0       	ldi	r24, 0x00	; 0
+ 238:	90 eb       	ldi	r25, 0xB0	; 176
+ 23a:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+    AD9832_Write_Register(0xC000);
+ 23e:	80 e0       	ldi	r24, 0x00	; 0
+ 240:	90 ec       	ldi	r25, 0xC0	; 192
+ 242:	0e 94 76 00 	call	0xec	; 0xec <AD9832_Write_Register>
+ 246:	08 95       	ret
+
+00000248 <AD5204_Write_Register>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 248:	21 e3       	ldi	r18, 0x31	; 49
+ 24a:	2a 95       	dec	r18
+ 24c:	f1 f7       	brne	.-4      	; 0x24a <AD5204_Write_Register+0x2>
+ 24e:	00 00       	nop
+}
+
+static void AD5204_Write_Register(uint8_t channel, uint8_t val)
+{
+    _delay_us(20);
+    OUTPUT_OFF(AD5204_PORT,AD5204_CLK);
+ 250:	9b b3       	in	r25, 0x1b	; 27
+ 252:	9f 77       	andi	r25, 0x7F	; 127
+ 254:	9b bb       	out	0x1b, r25	; 27
+ 256:	91 e3       	ldi	r25, 0x31	; 49
+ 258:	9a 95       	dec	r25
+ 25a:	f1 f7       	brne	.-4      	; 0x258 <AD5204_Write_Register+0x10>
+ 25c:	00 00       	nop
+    _delay_us(20);
+    OUTPUT_OFF(AD5204_PORT,AD5204_CS_PIN);
+ 25e:	9b b3       	in	r25, 0x1b	; 27
+ 260:	9f 7e       	andi	r25, 0xEF	; 239
+ 262:	9b bb       	out	0x1b, r25	; 27
+
+    for (uint8_t i = 0; i < 11; i++)
+ 264:	90 e0       	ldi	r25, 0x00	; 0
+ 266:	38 c0       	rjmp	.+112    	; 0x2d8 <AD5204_Write_Register+0x90>
+    {
+        OUTPUT_ON(AD5204_PORT,AD5204_CLK);
+ 268:	2b b3       	in	r18, 0x1b	; 27
+ 26a:	20 68       	ori	r18, 0x80	; 128
+ 26c:	2b bb       	out	0x1b, r18	; 27
+        if(i<3)
+ 26e:	93 30       	cpi	r25, 0x03	; 3
+ 270:	a8 f4       	brcc	.+42     	; 0x29c <AD5204_Write_Register+0x54>
+        {
+            if (((channel >> (2-i)) & 0x01) == 1)
+ 272:	42 e0       	ldi	r20, 0x02	; 2
+ 274:	50 e0       	ldi	r21, 0x00	; 0
+ 276:	49 1b       	sub	r20, r25
+ 278:	51 09       	sbc	r21, r1
+ 27a:	28 2f       	mov	r18, r24
+ 27c:	30 e0       	ldi	r19, 0x00	; 0
+ 27e:	02 c0       	rjmp	.+4      	; 0x284 <AD5204_Write_Register+0x3c>
+ 280:	35 95       	asr	r19
+ 282:	27 95       	ror	r18
+ 284:	4a 95       	dec	r20
+ 286:	e2 f7       	brpl	.-8      	; 0x280 <AD5204_Write_Register+0x38>
+ 288:	20 ff       	sbrs	r18, 0
+ 28a:	04 c0       	rjmp	.+8      	; 0x294 <AD5204_Write_Register+0x4c>
+            {
+                OUTPUT_ON(AD5204_PORT,AD5204_SDI_PIN);
+ 28c:	2b b3       	in	r18, 0x1b	; 27
+ 28e:	20 64       	ori	r18, 0x40	; 64
+ 290:	2b bb       	out	0x1b, r18	; 27
+ 292:	18 c0       	rjmp	.+48     	; 0x2c4 <AD5204_Write_Register+0x7c>
+            }
+            else
+            {
+                OUTPUT_OFF(AD5204_PORT,AD5204_SDI_PIN);
+ 294:	2b b3       	in	r18, 0x1b	; 27
+ 296:	2f 7b       	andi	r18, 0xBF	; 191
+ 298:	2b bb       	out	0x1b, r18	; 27
+ 29a:	14 c0       	rjmp	.+40     	; 0x2c4 <AD5204_Write_Register+0x7c>
+            }
+        }
+        else
+        {
+            if (((val >> (10-i)) & 0x01) == 1)
+ 29c:	4a e0       	ldi	r20, 0x0A	; 10
+ 29e:	50 e0       	ldi	r21, 0x00	; 0
+ 2a0:	49 1b       	sub	r20, r25
+ 2a2:	51 09       	sbc	r21, r1
+ 2a4:	26 2f       	mov	r18, r22
+ 2a6:	30 e0       	ldi	r19, 0x00	; 0
+ 2a8:	02 c0       	rjmp	.+4      	; 0x2ae <AD5204_Write_Register+0x66>
+ 2aa:	35 95       	asr	r19
+ 2ac:	27 95       	ror	r18
+ 2ae:	4a 95       	dec	r20
+ 2b0:	e2 f7       	brpl	.-8      	; 0x2aa <AD5204_Write_Register+0x62>
+ 2b2:	20 ff       	sbrs	r18, 0
+ 2b4:	04 c0       	rjmp	.+8      	; 0x2be <AD5204_Write_Register+0x76>
+            {
+                OUTPUT_ON(AD5204_PORT,AD5204_SDI_PIN);
+ 2b6:	2b b3       	in	r18, 0x1b	; 27
+ 2b8:	20 64       	ori	r18, 0x40	; 64
+ 2ba:	2b bb       	out	0x1b, r18	; 27
+ 2bc:	03 c0       	rjmp	.+6      	; 0x2c4 <AD5204_Write_Register+0x7c>
+            }
+            else
+            {
+                OUTPUT_OFF(AD5204_PORT,AD5204_SDI_PIN);
+ 2be:	2b b3       	in	r18, 0x1b	; 27
+ 2c0:	2f 7b       	andi	r18, 0xBF	; 191
+ 2c2:	2b bb       	out	0x1b, r18	; 27
+ 2c4:	2b e7       	ldi	r18, 0x7B	; 123
+ 2c6:	2a 95       	dec	r18
+ 2c8:	f1 f7       	brne	.-4      	; 0x2c6 <AD5204_Write_Register+0x7e>
+            }
+        }
+
+        _delay_us(50);
+        OUTPUT_OFF(AD9832_PORT,AD5204_CLK);
+ 2ca:	2b b3       	in	r18, 0x1b	; 27
+ 2cc:	2f 77       	andi	r18, 0x7F	; 127
+ 2ce:	2b bb       	out	0x1b, r18	; 27
+ 2d0:	2b e7       	ldi	r18, 0x7B	; 123
+ 2d2:	2a 95       	dec	r18
+ 2d4:	f1 f7       	brne	.-4      	; 0x2d2 <AD5204_Write_Register+0x8a>
+    _delay_us(20);
+    OUTPUT_OFF(AD5204_PORT,AD5204_CLK);
+    _delay_us(20);
+    OUTPUT_OFF(AD5204_PORT,AD5204_CS_PIN);
+
+    for (uint8_t i = 0; i < 11; i++)
+ 2d6:	9f 5f       	subi	r25, 0xFF	; 255
+ 2d8:	9b 30       	cpi	r25, 0x0B	; 11
+ 2da:	30 f2       	brcs	.-116    	; 0x268 <AD5204_Write_Register+0x20>
+
+        _delay_us(50);
+        OUTPUT_OFF(AD9832_PORT,AD5204_CLK);
+        _delay_us(50);
+    }
+    OUTPUT_ON(AD5204_PORT,AD5204_CS_PIN);
+ 2dc:	8b b3       	in	r24, 0x1b	; 27
+ 2de:	80 61       	ori	r24, 0x10	; 16
+ 2e0:	8b bb       	out	0x1b, r24	; 27
+ 2e2:	08 95       	ret
+
+000002e4 <AD5204_Set_Scale>:
+    OUTPUT_ON(AD5204_PORT,AD5204_CS_PIN);
+    AD5204_Set_Scale(4);
+}
+
+static void AD5204_Set_Scale(uint8_t level)
+{
+ 2e4:	cf 93       	push	r28
+ 2e6:	df 93       	push	r29
+ 2e8:	d8 2f       	mov	r29, r24
+    for(uint8_t channel = 0; channel < 4; channel++)
+ 2ea:	c0 e0       	ldi	r28, 0x00	; 0
+ 2ec:	05 c0       	rjmp	.+10     	; 0x2f8 <AD5204_Set_Scale+0x14>
+    {
+        AD5204_Write_Register(channel,level);
+ 2ee:	6d 2f       	mov	r22, r29
+ 2f0:	8c 2f       	mov	r24, r28
+ 2f2:	0e 94 24 01 	call	0x248	; 0x248 <AD5204_Write_Register>
+    AD5204_Set_Scale(4);
+}
+
+static void AD5204_Set_Scale(uint8_t level)
+{
+    for(uint8_t channel = 0; channel < 4; channel++)
+ 2f6:	cf 5f       	subi	r28, 0xFF	; 255
+ 2f8:	c4 30       	cpi	r28, 0x04	; 4
+ 2fa:	c8 f3       	brcs	.-14     	; 0x2ee <AD5204_Set_Scale+0xa>
+    {
+        AD5204_Write_Register(channel,level);
+    }    
+}
+ 2fc:	df 91       	pop	r29
+ 2fe:	cf 91       	pop	r28
+ 300:	08 95       	ret
+
+00000302 <AD5204_Init>:
+    OUTPUT_ON(AD9832_PORT,AD9832_FSYNC_PIN);
+}
+
+static void AD5204_Init(void)
+{
+    OUTPUT_ON(AD5204_PORT,AD5204_CS_PIN);
+ 302:	8b b3       	in	r24, 0x1b	; 27
+ 304:	80 61       	ori	r24, 0x10	; 16
+ 306:	8b bb       	out	0x1b, r24	; 27
+    AD5204_Set_Scale(4);
+ 308:	84 e0       	ldi	r24, 0x04	; 4
+ 30a:	0e 94 72 01 	call	0x2e4	; 0x2e4 <AD5204_Set_Scale>
+ 30e:	08 95       	ret
+
+00000310 <main>:
+static void AD5204_Set_Scale(uint8_t level);
+static void Uart_Transmit(char data);
+static void Uart_Transmit_Array(char *data_ptr, unsigned char length);
+static void Clear_Tx_Buffer(char *buf,unsigned int length);
+int main(void)
+{
+ 310:	cf 93       	push	r28
+ 312:	df 93       	push	r29
+ 314:	cd b7       	in	r28, 0x3d	; 61
+ 316:	de b7       	in	r29, 0x3e	; 62
+ 318:	c4 56       	subi	r28, 0x64	; 100
+ 31a:	d1 09       	sbc	r29, r1
+ 31c:	0f b6       	in	r0, 0x3f	; 63
+ 31e:	f8 94       	cli
+ 320:	de bf       	out	0x3e, r29	; 62
+ 322:	0f be       	out	0x3f, r0	; 63
+ 324:	cd bf       	out	0x3d, r28	; 61
+    char tx_buf[100] = {0,};
+ 326:	fe 01       	movw	r30, r28
+ 328:	31 96       	adiw	r30, 0x01	; 1
+ 32a:	84 e6       	ldi	r24, 0x64	; 100
+ 32c:	df 01       	movw	r26, r30
+ 32e:	1d 92       	st	X+, r1
+ 330:	8a 95       	dec	r24
+ 332:	e9 f7       	brne	.-6      	; 0x32e <main+0x1e>
+    Port_Init();
+ 334:	0e 94 41 00 	call	0x82	; 0x82 <Port_Init>
+    Uart_Init();
+ 338:	0e 94 45 00 	call	0x8a	; 0x8a <Uart_Init>
+
+    AD9832_Init();
+ 33c:	0e 94 0b 01 	call	0x216	; 0x216 <AD9832_Init>
+    AD5204_Init();
+ 340:	0e 94 81 01 	call	0x302	; 0x302 <AD5204_Init>
+    while (1) 
+    {
+        AD5204_Set_Scale(255);
+ 344:	8f ef       	ldi	r24, 0xFF	; 255
+ 346:	0e 94 72 01 	call	0x2e4	; 0x2e4 <AD5204_Set_Scale>
+        AD9832_Set_Frequency(500);
+ 34a:	64 ef       	ldi	r22, 0xF4	; 244
+ 34c:	71 e0       	ldi	r23, 0x01	; 1
+ 34e:	80 e0       	ldi	r24, 0x00	; 0
+ 350:	90 e0       	ldi	r25, 0x00	; 0
+ 352:	0e 94 a9 00 	call	0x152	; 0x152 <AD9832_Set_Frequency>
+		sprintf(tx_buf,"<Uart Print Test> \n");
+ 356:	84 e1       	ldi	r24, 0x14	; 20
+ 358:	e0 e6       	ldi	r30, 0x60	; 96
+ 35a:	f0 e0       	ldi	r31, 0x00	; 0
+ 35c:	8e 01       	movw	r16, r28
+ 35e:	0f 5f       	subi	r16, 0xFF	; 255
+ 360:	1f 4f       	sbci	r17, 0xFF	; 255
+ 362:	d8 01       	movw	r26, r16
+ 364:	01 90       	ld	r0, Z+
+ 366:	0d 92       	st	X+, r0
+ 368:	8a 95       	dec	r24
+ 36a:	e1 f7       	brne	.-8      	; 0x364 <main+0x54>
+		Uart_Transmit_Array(tx_buf,strlen(tx_buf));
+ 36c:	f8 01       	movw	r30, r16
+ 36e:	01 90       	ld	r0, Z+
+ 370:	00 20       	and	r0, r0
+ 372:	e9 f7       	brne	.-6      	; 0x36e <main+0x5e>
+ 374:	31 97       	sbiw	r30, 0x01	; 1
+ 376:	bf 01       	movw	r22, r30
+ 378:	60 1b       	sub	r22, r16
+ 37a:	71 0b       	sbc	r23, r17
+ 37c:	c8 01       	movw	r24, r16
+ 37e:	0e 94 52 00 	call	0xa4	; 0xa4 <Uart_Transmit_Array>
+		Clear_Tx_Buffer(tx_buf,100);
+ 382:	64 e6       	ldi	r22, 0x64	; 100
+ 384:	70 e0       	ldi	r23, 0x00	; 0
+ 386:	c8 01       	movw	r24, r16
+ 388:	0e 94 69 00 	call	0xd2	; 0xd2 <Clear_Tx_Buffer>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 38c:	8f ef       	ldi	r24, 0xFF	; 255
+ 38e:	97 e4       	ldi	r25, 0x47	; 71
+ 390:	01 97       	sbiw	r24, 0x01	; 1
+ 392:	f1 f7       	brne	.-4      	; 0x390 <main+0x80>
+ 394:	00 c0       	rjmp	.+0      	; 0x396 <main+0x86>
+ 396:	00 00       	nop
+ 398:	d5 cf       	rjmp	.-86     	; 0x344 <main+0x34>
+
+0000039a <__umoddi3>:
+ 39a:	68 94       	set
+ 39c:	01 c0       	rjmp	.+2      	; 0x3a0 <__udivdi3_umoddi3>
+
+0000039e <__udivdi3>:
+ 39e:	e8 94       	clt
+
+000003a0 <__udivdi3_umoddi3>:
+ 3a0:	8f 92       	push	r8
+ 3a2:	9f 92       	push	r9
+ 3a4:	cf 93       	push	r28
+ 3a6:	df 93       	push	r29
+ 3a8:	0e 94 db 01 	call	0x3b6	; 0x3b6 <__udivmod64>
+ 3ac:	df 91       	pop	r29
+ 3ae:	cf 91       	pop	r28
+ 3b0:	9f 90       	pop	r9
+ 3b2:	8f 90       	pop	r8
+ 3b4:	08 95       	ret
+
+000003b6 <__udivmod64>:
+ 3b6:	88 24       	eor	r8, r8
+ 3b8:	99 24       	eor	r9, r9
+ 3ba:	f4 01       	movw	r30, r8
+ 3bc:	e4 01       	movw	r28, r8
+ 3be:	b0 e4       	ldi	r27, 0x40	; 64
+ 3c0:	9f 93       	push	r25
+ 3c2:	aa 27       	eor	r26, r26
+ 3c4:	9a 15       	cp	r25, r10
+ 3c6:	8b 04       	cpc	r8, r11
+ 3c8:	9c 04       	cpc	r9, r12
+ 3ca:	ed 05       	cpc	r30, r13
+ 3cc:	fe 05       	cpc	r31, r14
+ 3ce:	cf 05       	cpc	r28, r15
+ 3d0:	d0 07       	cpc	r29, r16
+ 3d2:	a1 07       	cpc	r26, r17
+ 3d4:	98 f4       	brcc	.+38     	; 0x3fc <__udivmod64+0x46>
+ 3d6:	ad 2f       	mov	r26, r29
+ 3d8:	dc 2f       	mov	r29, r28
+ 3da:	cf 2f       	mov	r28, r31
+ 3dc:	fe 2f       	mov	r31, r30
+ 3de:	e9 2d       	mov	r30, r9
+ 3e0:	98 2c       	mov	r9, r8
+ 3e2:	89 2e       	mov	r8, r25
+ 3e4:	98 2f       	mov	r25, r24
+ 3e6:	87 2f       	mov	r24, r23
+ 3e8:	76 2f       	mov	r23, r22
+ 3ea:	65 2f       	mov	r22, r21
+ 3ec:	54 2f       	mov	r21, r20
+ 3ee:	43 2f       	mov	r20, r19
+ 3f0:	32 2f       	mov	r19, r18
+ 3f2:	22 27       	eor	r18, r18
+ 3f4:	b8 50       	subi	r27, 0x08	; 8
+ 3f6:	31 f7       	brne	.-52     	; 0x3c4 <__udivmod64+0xe>
+ 3f8:	bf 91       	pop	r27
+ 3fa:	27 c0       	rjmp	.+78     	; 0x44a <__EEPROM_REGION_LENGTH__+0x4a>
+ 3fc:	1b 2e       	mov	r1, r27
+ 3fe:	bf 91       	pop	r27
+ 400:	bb 27       	eor	r27, r27
+ 402:	22 0f       	add	r18, r18
+ 404:	33 1f       	adc	r19, r19
+ 406:	44 1f       	adc	r20, r20
+ 408:	55 1f       	adc	r21, r21
+ 40a:	66 1f       	adc	r22, r22
+ 40c:	77 1f       	adc	r23, r23
+ 40e:	88 1f       	adc	r24, r24
+ 410:	99 1f       	adc	r25, r25
+ 412:	88 1c       	adc	r8, r8
+ 414:	99 1c       	adc	r9, r9
+ 416:	ee 1f       	adc	r30, r30
+ 418:	ff 1f       	adc	r31, r31
+ 41a:	cc 1f       	adc	r28, r28
+ 41c:	dd 1f       	adc	r29, r29
+ 41e:	aa 1f       	adc	r26, r26
+ 420:	bb 1f       	adc	r27, r27
+ 422:	8a 14       	cp	r8, r10
+ 424:	9b 04       	cpc	r9, r11
+ 426:	ec 05       	cpc	r30, r12
+ 428:	fd 05       	cpc	r31, r13
+ 42a:	ce 05       	cpc	r28, r14
+ 42c:	df 05       	cpc	r29, r15
+ 42e:	a0 07       	cpc	r26, r16
+ 430:	b1 07       	cpc	r27, r17
+ 432:	48 f0       	brcs	.+18     	; 0x446 <__EEPROM_REGION_LENGTH__+0x46>
+ 434:	8a 18       	sub	r8, r10
+ 436:	9b 08       	sbc	r9, r11
+ 438:	ec 09       	sbc	r30, r12
+ 43a:	fd 09       	sbc	r31, r13
+ 43c:	ce 09       	sbc	r28, r14
+ 43e:	df 09       	sbc	r29, r15
+ 440:	a0 0b       	sbc	r26, r16
+ 442:	b1 0b       	sbc	r27, r17
+ 444:	21 60       	ori	r18, 0x01	; 1
+ 446:	1a 94       	dec	r1
+ 448:	e1 f6       	brne	.-72     	; 0x402 <__EEPROM_REGION_LENGTH__+0x2>
+ 44a:	2e f4       	brtc	.+10     	; 0x456 <__EEPROM_REGION_LENGTH__+0x56>
+ 44c:	94 01       	movw	r18, r8
+ 44e:	af 01       	movw	r20, r30
+ 450:	be 01       	movw	r22, r28
+ 452:	cd 01       	movw	r24, r26
+ 454:	00 0c       	add	r0, r0
+ 456:	08 95       	ret
+
+00000458 <__ashldi3>:
+ 458:	0f 93       	push	r16
+ 45a:	08 30       	cpi	r16, 0x08	; 8
+ 45c:	90 f0       	brcs	.+36     	; 0x482 <__ashldi3+0x2a>
+ 45e:	98 2f       	mov	r25, r24
+ 460:	87 2f       	mov	r24, r23
+ 462:	76 2f       	mov	r23, r22
+ 464:	65 2f       	mov	r22, r21
+ 466:	54 2f       	mov	r21, r20
+ 468:	43 2f       	mov	r20, r19
+ 46a:	32 2f       	mov	r19, r18
+ 46c:	22 27       	eor	r18, r18
+ 46e:	08 50       	subi	r16, 0x08	; 8
+ 470:	f4 cf       	rjmp	.-24     	; 0x45a <__ashldi3+0x2>
+ 472:	22 0f       	add	r18, r18
+ 474:	33 1f       	adc	r19, r19
+ 476:	44 1f       	adc	r20, r20
+ 478:	55 1f       	adc	r21, r21
+ 47a:	66 1f       	adc	r22, r22
+ 47c:	77 1f       	adc	r23, r23
+ 47e:	88 1f       	adc	r24, r24
+ 480:	99 1f       	adc	r25, r25
+ 482:	0a 95       	dec	r16
+ 484:	b2 f7       	brpl	.-20     	; 0x472 <__ashldi3+0x1a>
+ 486:	0f 91       	pop	r16
+ 488:	08 95       	ret
+
+0000048a <_exit>:
+ 48a:	f8 94       	cli
+
+0000048c <__stop_program>:
+ 48c:	ff cf       	rjmp	.-2      	; 0x48c <__stop_program>
