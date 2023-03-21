@@ -111,20 +111,22 @@ int main(void)
     AD7705_Init();
     while (1) 
     {
+
         /* AD5204 저항 증폭 Scale 설정 */
         AD5204_Set_Scale(255);        
         /* AD9832 Analog 출력 주파수[Hz] 설정 */
         AD9832_Set_Frequency(500);        
         /* AIN1 채널 ADC값 Read , Resolution : 1[mV] ex) 1000 -> 1[v] */
-        AIN1_Voltage = AD7705_ADC_Result(CHN_AIN1,0);
+        AIN1_Voltage = AD7705_ADC_Result(CHN_AIN1,0);        
+        _delay_ms(100);
         /* AIN2 채널 ADC값 Read , Resolution : 1[mV] ex) 1000 -> 1[v] */
         AIN2_Voltage = AD7705_ADC_Result(CHN_AIN2,0);
-
+        _delay_ms(100);
         /* Uart 출력 */
 		sprintf(tx_buf,"Channel1 ADC : %d.%d[V] , Channel2 ADC : %d.%d[V] \n",(AIN1_Voltage/1000),(AIN1_Voltage%100),(AIN2_Voltage/1000),(AIN2_Voltage%100));
 		Uart_Transmit_Array(tx_buf,strlen(tx_buf));
 		Clear_Tx_Buffer(tx_buf,100);
-        _delay_ms(50);
+        _delay_ms(10);
     }
 }
 
@@ -147,10 +149,12 @@ static void AD7705_Init(void)
     OUTPUT_ON(AD7705_PORT,AD7705_CS_PIN);        
     OUTPUT_ON(AD7705_PORT,AD7705_CLK_PIN);    
     AD7705_Reset();
+    _delay_ms(50);
     /* AIN1 채널 ADC 셋팅*/
-    AD7705_Channel_Setting(CHN_AIN1,CLK_DIV_1, BIPOLAR, GAIN_1, UPDATE_RATE_25);
+    AD7705_Channel_Setting(CHN_AIN1,CLK_DIV_1, BIPOLAR, GAIN_1, UPDATE_RATE_200);
+    _delay_ms(50);
     /* AIN2 채널 ADC 셋팅*/
-    AD7705_Channel_Setting(CHN_AIN2,CLK_DIV_1, BIPOLAR, GAIN_1, UPDATE_RATE_25);
+    AD7705_Channel_Setting(CHN_AIN2,CLK_DIV_1, BIPOLAR, GAIN_1, UPDATE_RATE_200);
 }
 
 static void AD7705_Reset(void)
@@ -225,7 +229,7 @@ static uint8_t AD7705_Data_Ready(uint8_t channel)
     /* 8bit LOW 출력 및 Read */
     val = (uint8_t)AD7705_Read_Data(1);
     /* DRDY 핀 Status 리턴 */
-    return (val & 0x80) == 0x0;
+    return ((val & 0x80) == 0x0);
 }
 
 static uint16_t AD7705_ADC_Result(uint8_t channel, uint16_t offset)
